@@ -1,30 +1,27 @@
-// let timer = document.getElementById('timer');
-// let currentTime = timer.textContent;
-
-
-// setInterval(function() {
-    
-//     currentTime-=1;
-//     timer.textContent = currentTime;
-//     if(currentTime <= 0){
-//     alert('Вы победили в конкурсе!')
-//     currentTime = 59;
-// }
-
-// }, 1000); 
-
 let timer = document.getElementById('timer');
-let currentTime = new Date (2022, 5, 6, 13, 30);
-timer.textContent =  `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSecond()}`;
+let currentTime = timer.textContent;
 
-
-setInterval(function() {
-    let nowTime = new Date;
-    currentTime = currentTime - nowTime;
-    timer.textContent = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSecond()}`;
-    if(currentTime <= 0){
-    alert('Вы победили в конкурсе!')
-    // currentTime = 59;
+function numToStrLengthTwo(num){
+return String(num).padStart(2, '0')
 }
 
-}, 1000);
+function getTimeStringFromSeconds(seconds) {
+    const hours = Math.trunc(seconds / 3600);
+    const minutesLeft = Math.trunc(Math.trunc(seconds % 3600)/60);
+    const secondsLeft = seconds % 60;
+
+    return `${numToStrLengthTwo(hours)}:${numToStrLengthTwo(minutesLeft)}:${numToStrLengthTwo(secondsLeft)}`;
+}
+
+setInterval(function() {
+    
+    currentTime-=1;
+    timer.textContent = getTimeStringFromSeconds(currentTime);
+    if(currentTime <= 0) {
+        window.location = 'https://customerscanvas.com/help/designers-manual/adobe/photoshop/files/text.psd'
+        currentTime = 120;
+}
+
+}, 1000); 
+
+
