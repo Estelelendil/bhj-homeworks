@@ -1,32 +1,35 @@
-const sliderRight = document.getElementsByClassName('slider__arrow_next');
+const sliderRight = document.querySelector('.slider__arrow_next');
+const sliderLeft = document.querySelector('.slider__arrow_prev');
 const sliderImages = document.getElementsByClassName('slider__item');
 arrSliderImages = Array.from(sliderImages);// массив картинок
 console.log(sliderRight)
 
 
-    
+let ind = 0;
+
+function changeSlide(slideNumber){
+arrSliderImages[ind].classList.remove('slider__item_active');
+arrSliderImages[slideNumber].classList.add('slider__item_active');
+ind = slideNumber;
+}
 
 sliderRight.onclick = function(){
-    console.log('recm')
-    for (let i = 0; i < arrSliderImages.length; i++) {
-        let ind = 0;
-        if(arrSliderImages[i].className.includes('slider__item_active')){
-        ind = i;
-        console.log(arrSliderImages[i], ind)
-        }
-        arrSliderImages[i].classList.remove('slider__item_active')
-        arrSliderImages[i++].classList.add('slider__item_active')
-        ind++;
-        
+    let newInd = ind + 1;
+    if(newInd >= arrSliderImages.length){
+        newInd = 0;
     }
+    changeSlide(newInd)
+    ind = newInd;
+ }
 
-    // arrSliderImages.forEach(element, index => {
-    //     let ind;
-    //     if(element.className.includes('slider__item_active')){
-    //         ind = index;
-    //     }
-
-    // });
+ sliderLeft.onclick = function(){
+    let newInd = ind - 1;
+    if(newInd < 0){
+        newInd = arrSliderImages.length - 1;
+    }
+    changeSlide(newInd)
+    ind = newInd;
+ 
 }
 
 
