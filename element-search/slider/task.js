@@ -2,10 +2,9 @@ const sliderRight = document.querySelector('.slider__arrow_next');
 const sliderLeft = document.querySelector('.slider__arrow_prev');
 const sliderImages = document.getElementsByClassName('slider__item');
 arrSliderImages = Array.from(sliderImages);// массив картинок
-console.log(sliderRight)
 
 
-let ind = 0;
+let ind = arrSliderImages.findIndex((item) => item.className.includes('slider__item_active'));
 
 function changeSlide(slideNumber){
 arrSliderImages[ind].classList.remove('slider__item_active');
