@@ -25,14 +25,12 @@ class Game {
       При неправильном вводе символа - this.fail();
      */
     document.addEventListener('keyup', (event) =>{
-      console.log(event.key)
-      console.log(this.currentSymbol.textContent)
-      console.log(event.key===this.currentSymbol.textContent)
       if(event.key===this.currentSymbol.textContent){
-        // this.success()
-        alert('success')
+        this.success()
+        
+        return
       }
-      alert('fail')
+      this.fail()
     })
   }
 
