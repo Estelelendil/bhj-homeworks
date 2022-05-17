@@ -27,8 +27,7 @@ class Game {
     document.addEventListener('keyup', (event) =>{
       if(event.key===this.currentSymbol.textContent){
         this.success()
-        
-        return
+         return
       }
       this.fail()
     })

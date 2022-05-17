@@ -14,17 +14,6 @@ let closes = document.querySelectorAll('.modal__close.modal__close_times');// к
 let modalMain = document.getElementById('modal_main') //выбираем красное окно
 console.log(closes)
 
-// closes[1].onclick = function(){
-//     modalSeccess.classList.remove('modal_active')
-//     modalMain.classList.remove('modal_active')
-    
-    
-// }
-// closes[0].onclick = function(){
-//     modalMain.classList.remove('modal_active')
-    
-// }
-
 closes.forEach(element => {
     element.onclick = function(){
         this.closest(".modal_active").classList.remove('modal_active');
