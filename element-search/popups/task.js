@@ -10,9 +10,9 @@ buttom.onclick = function(){ // при нажатии добавляем кла�
     modalMain.classList.remove('modal_active')
 }
 
-let closes = document.getElementsByClassName('modal__close modal__close_times');// коллекция элементов-крестиков(2)
+let closes = document.querySelectorAll('.modal__close.modal__close_times');// коллекция элементов-крестиков(2)
 let modalMain = document.getElementById('modal_main') //выбираем красное окно
-
+console.log(closes)
 
 // closes[1].onclick = function(){
 //     modalSeccess.classList.remove('modal_active')
@@ -27,7 +27,6 @@ let modalMain = document.getElementById('modal_main') //выбираем кра�
 
 closes.forEach(element => {
     element.onclick = function(){
-        this.closest(".modal_active").classList.remove('modal_active')
-    
+        this.closest(".modal_active").classList.remove('modal_active');
     }
 });
