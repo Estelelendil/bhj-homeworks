@@ -9,8 +9,12 @@ function changeRotator(arr){
         if(newInd>arr.length-1){
             newInd = 0;
         }
-        arr[newInd].classList.add('rotator__case_active')
+        arr[newInd].classList.add('rotator__case_active') 
+        const interval = arr[newInd].dataset.speed;
+        arr[newInd].style.color = arr[newInd].dataset.color;
+        setTimeout(changeRotator(rotators), interval)
     }
 }
 
-setInterval(changeRotator(rotators), 1000)
+changeRotator(rotators)();
+
