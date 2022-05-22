@@ -1,36 +1,66 @@
-const chatPanel = document.querySelector('.chat-widget__side-text')
-const chatWidget = document.querySelector('.chat-widget')
+let timeID;
+const timerTimeOut = 30000;
+const chatPanel = document.querySelector('.chat-widget__side-text');
+const chatWidget = document.querySelector('.chat-widget');
 
-chatPanel.onclick = function(){
-chatWidget.classList.add('chat-widget_active')
+const chatContainer = document.querySelector('.chat-widget__messages-container');
+chatPanel.onclick = function() {
+  chatWidget.classList.add('chat-widget_active');
 }
 
 const chatInput = document.getElementById('chat-widget__input');
 const messages = document.querySelector( '.chat-widget__messages' );
 
-
-// console.log(chatInput.required)
-
 document.addEventListener('keyup', (event)=>{
-    if(event.code == 'Enter' && chatInput.checkValidity()){
-// console.log(chatInput.required)
-let currentDate = new Date;
-currentDate = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
-messages.innerHTML += `
-<div class="message message_client">
-    <div class="message__time">${currentDate}</div>
-    <div class="message__text">${chatInput.value}</div>
-</div>
-`;
-chatInput.value = ''
-messages.innerHTML += `
+  clearTimeout(timeID);
+  if(event.code == 'Enter' && chatInput.checkValidity()){
+  
+    messages.innerHTML += generateUserMessage(chatInput.value);
+
+    chatInput.value = '';
+    messages.innerHTML += generateRobotMessage('Добрый день, мы ещё не проснулись. Позвоните через 10 лет');
+    chatContainer.scrollTop = messages.lastElementChild.getBoundingClientRect().top;
+
+  }
+  timeID = setTimeout(messengeIfYouForgoteChat, timerTimeOut );
+})
+
+chatInput.addEventListener('focus', e =>{
+  clearTimeout(timeID);
+  timeID = setTimeout(messengeIfYouForgoteChat, timerTimeOut );
+})
+
+function messengeIfYouForgoteChat(){
+  
+  messages.innerHTML += generateRobotMessage('Проснись и не занимай чужое время!');
+  chatContainer.scrollTop = messages.lastElementChild.getBoundingClientRect().top;
+
+}
+
+function getNewTimeString(){
+  let currentDate = new Date;
+  return `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+}
+
+function generateRobotMessage(str){
+  return `
   <div class="message">
-    <div class="message__time">${currentDate}</div>
+    <div class="message__time">${getNewTimeString()}</div>
     <div class="message__text">
-      Добрый день, мы ещё не проснулись. Позвоните через 10 лет
+      ${str}
     </div>
   </div>
-`;
-    }
-})
+  `;
+}
+
+function generateUserMessage(str){
+  return `
+  <div class="message message_client">
+    <div class="message__time">${getNewTimeString()}</div>
+    <div class="message__text">
+      ${str}
+    </div>
+  </div>
+  `;
+}
 
