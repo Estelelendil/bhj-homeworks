@@ -68,6 +68,22 @@ class Autocomplete {
   }
 
   getMatches( text ) {
+
+    const textLowerCase = text.toLowerCase();
+    console.log(textLowerCase)
+    const arr = Array.from(document.querySelector('.autocomplete__input').querySelectorAll('option')).map(el => el.textContent)// cоздаю массив всех опций
+    console.log(arr)
+    let arrLowerCase = arr.map(el => el.toLowerCase());
+    
+    const newArr = arrLowerCase.reduce((result, currentValue, currentIndex)=>{
+      if(currentValue.includes(textLowerCase)){
+        result.push({text : arr[currentIndex], value : result.length+1})
+      }
+      return result
+    }, [])
+    return newArr
+      
+    // }
     /*
       TODO: этот метод нужно дописать
       text - фраза, которую вводят в поле поиска
