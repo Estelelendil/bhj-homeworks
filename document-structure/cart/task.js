@@ -16,7 +16,7 @@ minus.forEach(item =>{
 const productQuantity = item.closest('.product__quantity-controls').querySelector('.product__quantity-value');
 const productQuantityValue = productQuantity.textContent;
 
-productQuantityValue > 0 ? productQuantity.textContent = Number(productQuantityValue) - 1 : productQuantity.textContent = 0;
+productQuantity.textContent = productQuantityValue > 0 ?  Number(productQuantityValue) - 1 :  0;
     })
 })
 
@@ -28,25 +28,22 @@ const cardProducts = document.querySelector('.cart__products');// Корзина
 productAdd.forEach(item =>{//При нажатии на кнопку "Добавить"
     item.addEventListener('click', ()=>{
         const picture = item.closest('.product').querySelector('.product__image').getAttribute('src');
-       
-        const quantity = item.closest('.product__quantity').querySelector('.product__quantity-value').textContent;
+        const CurrentProductQuantity = item.closest('.product__quantity').querySelector('.product__quantity-value');
+        const quantity = CurrentProductQuantity.textContent;
         
         const productId = item.closest('.product').dataset.id;
         
-        const productInCard = Array.from(cardProducts.querySelectorAll('.cart__product'));//массив уже добавленных товаров
+        const productsInCart = Array.from(cardProducts.querySelectorAll('.cart__product'));//массив уже добавленных товаров
 
-        AddProduct(productId, picture, quantity);
-
-        // productInCard.forEach(elem =>{// проходимся по уже добавленным товарам
-        //     if(elem.dataset.id = productId){// смотрим, не совпадает ли ID
-        //         quantity = quantity + elem.querySelector('.cart__product-count').textContent;
-
-        //         AddProduct(productId, picture, quantity)
-        //     }
-        //      AddProduct(productId, picture, quantity) 
-
-        // })
-        
+        const productInCart = productsInCart.find(elem => elem.dataset.id == productId);// наши товар который дублируется
+        if(productInCart){
+            const quantityElem = productInCart.querySelector('.cart__product-count');
+            quantityElem.textContent = Number(quantityElem.textContent) + Number(quantity);
+        }
+        else{
+            AddProduct(productId, picture, quantity) ;
+        };
+        CurrentProductQuantity.textContent = 1;
         })
 
 })
@@ -58,4 +55,5 @@ function AddProduct(Id, picture, quantity){
                 <div class="cart__product-count">${quantity}</div>
                 </div>`) : alert('Выберите хотя бы один продукт');
                 return true;
+
 }
