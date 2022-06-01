@@ -12,7 +12,7 @@ tooltips.forEach(item =>{
             return;
         }
     
- let tooltip = document.querySelector('.tooltip');
+        let tooltip = document.querySelector('.tooltip');
 
         if(tooltip){ 
             tooltip.remove();
