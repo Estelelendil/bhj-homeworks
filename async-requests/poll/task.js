@@ -13,6 +13,8 @@ xhr.addEventListener('readystatechange', ()=>{
         pollTitle.textContent = title;
         let responceAnswer = answer.data.answers;//массив
         responceAnswer.forEach(element => {
+            // let btn = document.createElement('button');
+            // btn.textContent = `${element}`;
             pollAnswer.insertAdjacentHTML('afterbegin', ` <button class="poll__answer">
             ${element}
           </button>`)

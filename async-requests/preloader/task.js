@@ -19,6 +19,9 @@ xhr.addEventListener('readystatechange', ()=>{
         localStorage.setItem('valute', JSON.stringify(valute));
         renderObject(valute);
     }
+    if(xhr.readyState !=200){
+        alert('Что-то пошло не так')
+    }
 })
 
 function renderObject(obj){
