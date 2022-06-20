@@ -1,9 +1,8 @@
 let textFrame = document.getElementById('editor');
 let text = localStorage.getItem('content');
 const btn = document.querySelector('.btn');
-if (text){
-    textFrame.value = text;
-}
+textFrame.value = text;
+
 
 textFrame.addEventListener('keyup', e=>{
     console.log(textFrame.value);
@@ -11,7 +10,7 @@ textFrame.addEventListener('keyup', e=>{
 });
 
 btn.onclick = function(){
-    localStorage.clear();
+    localStorage.removeItem('content')
     textFrame.value = '';
 }
 
